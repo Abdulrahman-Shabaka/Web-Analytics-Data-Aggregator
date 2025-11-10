@@ -1,0 +1,193 @@
+💼 Hiring Quest – .NET Engineer (3 YOE) @ ElectroPi
+Description
+👋 We are ElectroPi, empowering businesses to unlock the full potential of AI by providing customized solutions that address their unique challenges.
+Whether it's optimizing workflows, enhancing decision-making, or driving innovation, our advanced AI tools and services are tailored to meet the specific needs of various industries.
+
+We’re now hiring a .NET Engineer to join our on-site team and help us build the backend systems that power our intelligent automation and AI platforms.
+
+🕓 Start Date: 1 November 2025
+💰 Salary Range: 30,000 – 35,000 EGP
+💼 Contract Type: Full-time -  on-site
+✨ Culture : Prayers on time , Hijab (females)
+
+🛠️ How the Hiring Quest Works
+ Register for the quest
+
+Receive the full challenge after registration closes
+
+Submit your solution before the deadline
+
+Top candidates are invited to a technical review session
+
+One candidate will be hired
+
+🔍 Who We’re Looking For
+✅ 1–3 years of experience with .NET 6+/7+/8+
+
+✅ Good knowledge of ASP.NET Core Web API
+
+✅ Understanding of Entity Framework Core and SQL databases
+
+✅ Experience with JWT authentication
+
+✅ Comfortable building and documenting REST APIs
+
+✅ Familiar with clean, modular code and async programming
+
+💡 Bonus: Some experience with Docker, Redis, or unit testing
+
+🎯 Your Mission: “Web Analytics Data Aggregator”
+🧠 Business Context
+
+ElectroPi helps clients use data to make smart decisions. In this quest, you’ll build a small backend system that reads data from two online tools, processes it through a real message broker, and exposes a simple reporting API.
+
+Tools (mocked via JSON files):
+
+Google Analytics (GA) → website traffic data (users, sessions, views)
+
+PageSpeed Insights (PSI) → performance data (scores, timings)
+
+You do not need real GA/PSI APIs — mock with JSON files.
+
+📌 The Challenge (Queue is Mandatory)
+Step 1 – Read Data (Ingestion)
+
+Create two adapters/services that read JSON files.
+
+GA mock (example): { "date": "2025-10-20", "page": "/home", "users": 120, "sessions": 150, "views": 310 }
+
+PSI mock (example):{ "date": "2025-10-20", "page": "/home", "performanceScore": 0.9, "LCP_ms": 2100 }
+
+Combine into a standard record:
+
+{ "page": "/home", "date": "2025-10-20", "users": 120, "sessions": 150, "views": 310, "performanceScore": 0.9,"LCP_ms": 2100}
+
+Step 2 – Publish to a Real Message Broker (Required)
+
+Use RabbitMQ or Apache Kafka.
+
+In-memory queues are not allowed.
+
+Publish each combined record to a topic/queue:
+
+Kafka: topic analytics.raw
+
+RabbitMQ: exchange analytics.raw (fanout/direct) and a queue analytics.raw.q
+
+Step 3 – Process & Aggregate (Background Consumer)
+
+Create a background worker that consumes from the broker and aggregates:
+
+Per day:
+
+totalUsers, totalSessions, totalViews
+
+avgPerformance (mean of performanceScore)
+
+Persist with EF Core to your SQL DB.
+
+Aggregated example:{"date": "2025-10-20","totalUsers": 480,"totalSessions": 550, "totalViews": 1200, "avgPerformance": 0.88}
+
+Basic reliability: Acknowledge only after successful save; include simple retry (e.g., 3 attempts with backoff).
+
+If using RabbitMQ, you may use a dead-letter queue analytics.dlq (bonus).
+
+Step 4 – Reporting APIs (JWT-Protected)
+
+GET /reports/overview → totals across all pages & dates
+
+GET /reports/pages → grouped by page (with per-page totals/averages)
+
+Auth: Basic email/password signup/login + JWT (Bearer) for report endpoints.
+
+🗄️ Database Design (Suggested)
+Users: Id, Name, Email, PasswordHash, CreatedAt
+
+RawData: Id, Date, Page, Users, Sessions, Views, PerformanceScore, LCPms, ReceivedAt
+
+DailyStats: Id, Date, TotalUsers, TotalSessions, TotalViews, AvgPerformance, LastUpdatedAt
+
+✅ Acceptance Checks (Queue Enforcement)
+To be considered complete, your submission must include:
+
+Docker Compose that starts API + DB + Broker (RabbitMQ or Kafka).
+
+A producer service that publishes to the real broker.
+
+A consumer background service that reads from the broker and writes to DB.
+
+Clear logs showing:
+
+messages published → consumed → saved
+
+retry attempts on transient failures
+
+Swagger showing the secured report endpoints.
+
+A quick seed script or pre-bundled JSON mock files to generate sample data.
+
+🎁 Bonus Points (Optional)
+✨ Docker Compose healthchecks & wait-for scripts
+
+✨ Dead-letter queue (DLQ) with reason captured
+
+✨ Unit tests (adapters, aggregator)
+
+✨ Minimal frontend page to display reports
+
+✨ Metrics endpoint (e.g., /health, /metrics)
+
+✨ README diagram of flow (Producer → Broker → Consumer → DB → API)
+
+🧰 Tech Stack
+Backend: .NET 8 + ASP.NET Core Web API
+
+Database: SQL Server or PostgreSQL (EF Core)
+
+Broker (Required): RabbitMQ or Kafka
+
+Auth: JWT
+
+Docs: Swagger / OpenAPI
+
+Runtime: Docker Compose
+
+📝 What You Should Submit
+📂 GitHub Repository with:
+
+Organized code (API, Services, Data, Models, Background worker)
+
+docker-compose.yml (API + DB + Broker)
+
+README.md with setup steps:
+
+docker compose up -d
+
+how to seed/read JSON
+
+how to hit Swagger + get a JWT
+
+Optional ARCHITECTURE.md (flow diagram & key decisions)
+
+📹 10-Minute Video
+
+🎥 3 min — Introduce yourself + two technical challenges you’ve solved
+
+⚙️ 7 min — Show the end-to-end flow (publish → consume → DB → API demo)
+
+📊 Evaluation Criteria
+Code Quality & Structure (clean architecture, separation of concerns) 30%
+
+Completeness & Correctness (end-to-end through the real broker) 25%
+
+API Design & Documentation (clear models, Swagger, auth) 20%
+
+Database Design (sensible schema, EF migrations) 15%
+
+Reliability & Error Handling (retries, acks, idempotency basics) 10%
+
+Bonus: Docker polish, DLQ, tests, simple UI, metrics.
+
+📩 After Submission
+Top candidates will be invited to a technical review session.
+👉 Final hiring decision within 3–5 business days after the review.

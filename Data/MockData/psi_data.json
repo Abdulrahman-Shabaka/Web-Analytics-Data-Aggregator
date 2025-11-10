@@ -1,0 +1,33 @@
+[
+  {
+    "date": "2025-10-20",
+    "page": "/home",
+    "performanceScore": 0.9,
+    "LCP_ms": 2100
+  },
+  {
+    "date": "2025-10-20",
+    "page": "/products",
+    "performanceScore": 0.85,
+    "LCP_ms": 2300
+  },
+  {
+    "date": "2025-10-20",
+    "page": "/about",
+    "performanceScore": 0.88,
+    "LCP_ms": 2000
+  },
+  {
+    "date": "2025-10-21",
+    "page": "/home",
+    "performanceScore": 0.92,
+    "LCP_ms": 1950
+  },
+  {
+    "date": "2025-10-21",
+    "page": "/products",
+    "performanceScore": 0.87,
+    "LCP_ms": 2250
+  }
+]
+

@@ -1,0 +1,38 @@
+[
+  {
+    "date": "2025-10-20",
+    "page": "/home",
+    "users": 120,
+    "sessions": 150,
+    "views": 310
+  },
+  {
+    "date": "2025-10-20",
+    "page": "/products",
+    "users": 80,
+    "sessions": 95,
+    "views": 220
+  },
+  {
+    "date": "2025-10-20",
+    "page": "/about",
+    "users": 45,
+    "sessions": 50,
+    "views": 120
+  },
+  {
+    "date": "2025-10-21",
+    "page": "/home",
+    "users": 135,
+    "sessions": 165,
+    "views": 340
+  },
+  {
+    "date": "2025-10-21",
+    "page": "/products",
+    "users": 95,
+    "sessions": 110,
+    "views": 250
+  }
+]
+
